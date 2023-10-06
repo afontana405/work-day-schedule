@@ -17,22 +17,16 @@ $(function () {
   // document.getElementsByClassName('btn-save').addEventListener('click', saveInput());
 
   // function saveInput() {
-  //   console.log(this.id);
+    //   console.log(this.id);
   // };
-
+  
   
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  
 });
 
-saveBtn.on('click', function () {
-  var textContent = $(this).siblings('.description').val();
-  var hourId = $(this).parent().attr('id');
-  localStorage.setItem(hourId, textContent);
-});
-
+console.log(currentHour);
 // sets class and display elements based on its relation to the current hour
 for (var i = 0; i < timeBlock.length; i++) {
   var textArea = $(timeBlock[i]).children('.description');
@@ -40,7 +34,14 @@ for (var i = 0; i < timeBlock.length; i++) {
     textArea.addClass('past');
   } else if (timeBlock[i].id == currentHour) {
     textArea.addClass('present');
-  } else {
+  } else if (timeBlock[i].id > currentHour) {
+    console.log(timeBlock[i].id);
     timeBlock.addClass('future');
-  }
+  };
 };
+
+saveBtn.on('click', function () {
+  var textContent = $(this).siblings('.description').val();
+  var hourId = $(this).parent().attr('id');
+  localStorage.setItem(hourId, textContent);
+});
